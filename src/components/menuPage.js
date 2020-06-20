@@ -13,7 +13,9 @@ export default class MenuPage extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://api.guildwars2.com/v2/account?access_token=")
+    fetch(
+      `https://api.guildwars2.com/v2/account?access_token=49D110DB-B246-524A-B482-5037FD1F15C3E6120D6B-164D-40DF-BAE0-4D6D7C510993`
+    )
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
@@ -33,36 +35,60 @@ export default class MenuPage extends Component {
           >{`Bienvenue ${this.state.dataSource.name}`}</Text>
           <Button
             icon={<Icons name="person" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  Account"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
           />
           <Button
             icon={<Icons name="persons" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  Characters"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
           />
           <Button
             icon={<Icons name="bitcoin" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  Commerce"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
           />
           <Button
             icon={<Icon name="shield" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  Guild"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
           />
           <Button
             icon={<Icons name="bandage" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  PvP"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
           />
           <Button
             icon={<Icons name="electronjs" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+              height: 50,
+            }}
             title="  WvW"
             style={styles.button}
             onPress={() => this.props.navigation.push("Menu")}
@@ -85,5 +111,6 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 30,
+    borderRadius: 5,
   },
 });

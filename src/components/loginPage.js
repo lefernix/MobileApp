@@ -3,11 +3,18 @@ import {
   TextInput,
   View,
   StyleSheet,
-  ImageBackground,
+  Image,
   Dimensions,
+  AsyncStorage,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Linking,
+  Text,
 } from "react-native";
 import { CheckBox, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Icons from "react-native-vector-icons/AntDesign";
 
 var width = Dimensions.get("window").width; //full width
 var height = Dimensions.get("window").height; //full height
@@ -17,40 +24,66 @@ export default class LoginPage extends Component {
     super(props);
 
     this.state = {
-      username: "",
+      key: "",
       checked: false,
     };
   }
 
-  onLogin() {
-    const { username } = this.state;
-
-    Alert.alert("Vous êtes connecté");
-  }
+  onLogin = () => {
+    try {
+      this.props.navigation.push("Menu");
+      const { key } = this.state;
+      AsyncStorage.setItem("APIKey", key);
+    } catch (err) {
+      Alert.alert(err);
+    }
+  };
 
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          // icon={<Icon name="key" size={15} color="white" />}
-          value={this.state.username}
-          onChangeText={(username) => this.setState({ username })}
-          placeholder={"API KEY"}
-          style={styles.input}
-          leftIcon={<Icon name="user" size={24} color="black" />}
-        />
-        <CheckBox
-          title="Se souvenir de ma clé"
-          checked={this.state.checked}
-          onPress={() => this.setState({ checked: !this.state.checked })}
-        />
-        <Button
-          icon={<Icon name="send-o" size={15} color="white" />}
-          title="Login"
-          style={styles.button}
-          onPress={() => this.props.navigation.push("Menu")}
-        />
-      </View>
+      <TouchableWithoutFeedback
+        style={{ flex: 1 }}
+        onPress={Keyboard.dismiss}
+        accessible={false}
+      >
+        <View style={styles.container}>
+          <Image
+            source={require("../../assets/images/gw2bg.png")}
+            style={styles.logo}
+          />
+          <TextInput
+            onChangeText={(key) => this.setState({ key })}
+            placeholder={"XXXX-XXXX-XXXX-XXXX"}
+            style={styles.input}
+            leftIcon={<Icon name="user" size={24} color="black" />}
+            value={this.state.checked && this.state.key}
+          />
+          <CheckBox
+            title="Se souvenir de ma clé"
+            checked={this.state.checked}
+            onPress={() => this.setState({ checked: !this.state.checked })}
+          />
+          <Button
+            icon={<Icons name="login" size={15} color="white" />}
+            buttonStyle={{
+              backgroundColor: "#a82e2b",
+            }}
+            title="  Login"
+            style={styles.button}
+            onPress={() => this.onLogin()}
+          />
+          <Text
+            style={{ color: "blue" }}
+            onPress={() =>
+              Linking.openURL(
+                "https://account.arena.net/login?redirect_uri=%2Fapplications"
+              )
+            }
+          >
+            Vous n'avez pas de clé API ? Cliquez ici
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -61,8 +94,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
-    alignSelf: "stretch",
-    backgroundColor: "#f44336",
+    backgroundColor: "white",
+    paddingBottom: 100,
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 50,
   },
   input: {
     width: 300,
@@ -76,5 +116,9 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 13,
+    width: 200,
+    height: 84,
+    borderRadius: 5,
+    fontSize: 26,
   },
 });
