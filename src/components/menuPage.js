@@ -1,0 +1,89 @@
+import React, { Component } from "react";
+import { StyleSheet, SafeAreaView, ScrollView, Text } from "react-native";
+import { Button } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Icons from "react-native-vector-icons/Fontisto";
+
+export default class MenuPage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      dataSource: false || "hello",
+    };
+  }
+  componentDidMount() {
+    fetch("https://api.guildwars2.com/v2/account?access_token=")
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          loading: false,
+          dataSource: responseJson,
+        });
+      })
+      .catch((error) => console.log(error)); //to catch the errors if any
+  }
+
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+          <Text
+            style={styles.headerText}
+          >{`Bienvenue ${this.state.dataSource.name}`}</Text>
+          <Button
+            icon={<Icons name="person" size={15} color="white" />}
+            title="  Account"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+          <Button
+            icon={<Icons name="persons" size={15} color="white" />}
+            title="  Characters"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+          <Button
+            icon={<Icons name="bitcoin" size={15} color="white" />}
+            title="  Commerce"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+          <Button
+            icon={<Icon name="shield" size={15} color="white" />}
+            title="  Guild"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+          <Button
+            icon={<Icons name="bandage" size={15} color="white" />}
+            title="  PvP"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+          <Button
+            icon={<Icons name="electronjs" size={15} color="white" />}
+            title="  WvW"
+            style={styles.button}
+            onPress={() => this.props.navigation.push("Menu")}
+          />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  headerText: {
+    textAlign: "center",
+    margin: 10,
+    fontSize: 24,
+  },
+  button: {
+    margin: 30,
+  },
+});
