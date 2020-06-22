@@ -10,6 +10,7 @@ export default class MenuPage extends Component {
 
     this.state = {
       dataSource: false || "hello",
+      key: this.props.route.params.key,
     };
   }
   componentDidMount() {
@@ -43,7 +44,7 @@ export default class MenuPage extends Component {
             style={styles.button}
             onPress={() =>
               this.props.navigation.push("Account", {
-                key: ["Brent", "Satya", "Michaś"],
+                key: this.state.key,
               })
             }
           />
@@ -55,7 +56,9 @@ export default class MenuPage extends Component {
             }}
             title="  Characters"
             style={styles.button}
-            onPress={() => this.props.navigation.push("Menu")}
+            onPress={() =>
+              this.props.navigation.push("Menu", { key: this.state.key })
+            }
           />
           <Button
             icon={<Icons name="bitcoin" size={15} color="white" />}

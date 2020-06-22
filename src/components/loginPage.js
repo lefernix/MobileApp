@@ -56,7 +56,6 @@ export default class LoginPage extends Component {
             placeholder={"XXXX-XXXX-XXXX-XXXX"}
             style={styles.input}
             leftIcon={<Icon name="user" size={24} color="black" />}
-            value={this.state.checked && this.state.key}
           />
           <CheckBox
             title="Se souvenir de ma clé"
