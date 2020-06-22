@@ -31,8 +31,8 @@ export default class LoginPage extends Component {
 
   onLogin = () => {
     try {
-      this.props.navigation.push("Menu");
       const { key } = this.state;
+      this.props.navigation.push("Menu", { key: this.state.key });
       AsyncStorage.setItem("APIKey", key);
     } catch (err) {
       Alert.alert(err);

@@ -14,7 +14,7 @@ export default class MenuPage extends Component {
   }
   componentDidMount() {
     fetch(
-      `https://api.guildwars2.com/v2/account?access_token=49D110DB-B246-524A-B482-5037FD1F15C3E6120D6B-164D-40DF-BAE0-4D6D7C510993`
+      `https://api.guildwars2.com/v2/account?access_token=${this.props.route.params.key}`
     )
       .then((response) => response.json())
       .then((responseJson) => {
@@ -41,7 +41,11 @@ export default class MenuPage extends Component {
             }}
             title="  Account"
             style={styles.button}
-            onPress={() => this.props.navigation.push("Menu")}
+            onPress={() =>
+              this.props.navigation.push("Account", {
+                key: ["Brent", "Satya", "Michaś"],
+              })
+            }
           />
           <Button
             icon={<Icons name="persons" size={15} color="white" />}

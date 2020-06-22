@@ -5,6 +5,7 @@ import LoginPage from "./src/components/loginPage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuPage from "./src/components/menuPage";
+import Account from "./src/components/Menu/Account";
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -14,6 +15,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Home">
           <Stack.Screen name="Home" component={LoginPage} />
           <Stack.Screen name="Menu" component={MenuPage} />
+          <Stack.Screen name="Account" component={Account} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>

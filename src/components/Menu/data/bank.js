@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, Alert, StyleSheet } from "react-native";
 import { ListItem } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-class Account extends Component {
+class Bank extends Component {
   constructor(props) {
     super(props);
 
@@ -83,7 +83,7 @@ class Account extends Component {
   }
 }
 
-export default Account;
+export default Bank;
 
 const styles = StyleSheet.create({
   container: {
