@@ -6,7 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import MenuPage from "./src/components/menuPage";
 import Account from "./src/components/Menu/Account/Account";
-import AccountData from "./src/components/Menu/Account/data/data";
+import AccountData from "./src/components/Menu/Account/view/view";
 
 export default function App() {
   const Stack = createStackNavigator();
